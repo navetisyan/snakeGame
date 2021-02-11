@@ -44,8 +44,9 @@ function SnakeGame() {
         this.snake.drawSnake();
     }
 
-    this.moveSnake = function() {
+    this.changeDirection = function(direction){
 
+        game.snake.direction = direction;
         switch (this.snake.direction) {
             case UP:
                 this.snake.xDelta = 0;
@@ -64,6 +65,9 @@ function SnakeGame() {
                 this.snake.yDelta = 0;
                 break;
         }
+    }
+
+    this.moveSnake = function() {
 
         const head = {
             x: this.snake.body[0].x + this.snake.xDelta,
@@ -127,13 +131,13 @@ loop();
 document.addEventListener('keydown', function(event) {
 
     if (event.code === "ArrowUp" && game.snake.direction != DOWN) {
-        game.snake.direction = UP;
+        game.changeDirection(UP);
     } else if (event.code === "ArrowDown" && game.snake.direction != UP) {
-        game.snake.direction = DOWN;
+        game.changeDirection(DOWN);
     } else if (event.code === "ArrowLeft" && game.snake.direction != RIGHT) {
-        game.snake.direction = LEFT;
+        game.changeDirection(LEFT);
     } else if (event.code === "ArrowRight" && game.snake.direction != LEFT) {
-        game.snake.direction = RIGHT;
+        game.changeDirection(RIGHT);
     }
 });
 
